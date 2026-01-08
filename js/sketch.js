@@ -5,7 +5,7 @@ let cnv;
 const GRID_COLS = 3;
 const GRID_ROWS = 3;
 const SPRING = 0.1;
-const FRICTION = 0.85;
+const FRICTION = 0.45;
 const IMPULSE = 300;
 
 // State
@@ -218,7 +218,7 @@ function applyImpulse(c, r) {
     rowVels[r] += IMPULSE;
 
     // Trigger red flash (approx 50% opacity = 127/255)
-    cellAlphas[c][r] = 127;
+    cellAlphas[c][r] = 90;
 }
 
 function windowResized() {
