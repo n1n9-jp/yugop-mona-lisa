@@ -52,3 +52,18 @@ canvas {
 .controls input {
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .controls {
+        bottom: 60px;
+    }
+
+    .footer.right {
+        bottom: 15px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+        text-align: left;
+        line-height: 1.4;
+    }
+}
