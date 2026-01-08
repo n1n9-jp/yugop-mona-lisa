@@ -230,3 +230,31 @@ function applyImpulse(c, r) {
 function windowResized() {
     location.reload();
 }
+
+function mousePressed() {
+    // Check if within face bounds
+    if (mouseX < faceX || mouseX > faceX + faceW ||
+        mouseY < faceY || mouseY > faceY + faceH) {
+        return;
+    }
+
+    // Determine which cell was clicked (accounting for dynamic sizes)
+    let yPos = faceY;
+    for (let r = 0; r < GRID_ROWS; r++) {
+        let h = rowSizes[r];
+        if (mouseY >= yPos && mouseY < yPos + h) {
+
+            let xPos = faceX;
+            for (let c = 0; c < GRID_COLS; c++) {
+                let w = colSizes[c];
+                if (mouseX >= xPos && mouseX < xPos + w) {
+                    // Clicked on cell (c, r)
+                    applyImpulse(c, r);
+                    return false; // Prevent default for touch
+                }
+                xPos += w;
+            }
+        }
+        yPos += h;
+    }
+}
