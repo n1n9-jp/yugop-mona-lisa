@@ -123,6 +123,9 @@ function drawGrid() {
     // Start drawing from the top-left of the FACE region
     let yPos = faceY;
 
+    // Check toggle state (using correct ID from index.html)
+    const showGrid = document.getElementById('gridToggle').checked;
+
     for (let r = 0; r < GRID_ROWS; r++) {
         let xPos = faceX;
         let h = rowSizes[r];
@@ -152,23 +155,26 @@ function drawGrid() {
             }
             // ------------------------
 
-            // Add thin white border
-            noFill();
-            stroke(255, 180); // Slightly transparent white
-            strokeWeight(1);
-            rect(xPos, yPos, w, h);
+            // Render grid lines and numbers ONLY if enabled
+            if (showGrid) {
+                // Add thin white border
+                noFill();
+                stroke(255, 180); // Slightly transparent white
+                strokeWeight(1);
+                rect(xPos, yPos, w, h);
 
-            // Draw Number Labels
-            let num = 0;
-            if (r === 0) num = 7 + c;
-            else if (r === 1) num = 4 + c;
-            else if (r === 2) num = 1 + c;
+                // Draw Number Labels
+                let num = 0;
+                if (r === 0) num = 7 + c;
+                else if (r === 1) num = 4 + c;
+                else if (r === 2) num = 1 + c;
 
-            fill(255, 200);
-            noStroke();
-            textAlign(LEFT, TOP);
-            textSize(14);
-            text(num, xPos + 5, yPos + 5);
+                fill(255, 200);
+                noStroke();
+                textAlign(LEFT, TOP);
+                textSize(14);
+                text(num, xPos + 5, yPos + 5);
+            }
 
             xPos += w;
         }
@@ -217,7 +223,7 @@ function applyImpulse(c, r) {
     colVels[c] += IMPULSE;
     rowVels[r] += IMPULSE;
 
-    // Trigger red flash (approx 50% opacity = 127/255)
+    // Trigger red flash
     cellAlphas[c][r] = 90;
 }
 
